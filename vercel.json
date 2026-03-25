@@ -1,7 +1,11 @@
 {
-  "functions": {
-    "api/subscribe.js": {
-      "runtime": "nodejs18.x"
-    }
-  }
+  "version": 2,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "api/subscribe.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/subscribe", "dest": "/api/subscribe.js" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
