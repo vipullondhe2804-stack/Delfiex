@@ -15,7 +15,7 @@
     .nav-right{display:flex;align-items:center;gap:16px;}
     .nav-link{font-size:13px;color:rgba(255,255,255,0.5);cursor:pointer;text-decoration:none;}
     .nav-cta{font-size:13px;font-weight:600;color:#fff;background:var(--accent);padding:8px 18px;border-radius:20px;cursor:pointer;border:none;font-family:'Inter',sans-serif;}
-    .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;overflow:hidden;}
+    .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px 80px;overflow:hidden;}
     .scene{position:absolute;inset:0;z-index:0;}
     .scene-bg{position:absolute;inset:0;background:#08090c;}
     .stadium-glow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:140%;height:60%;background:radial-gradient(ellipse at 50% 100%,rgba(249,115,22,0.07) 0%,transparent 70%);}
@@ -87,7 +87,6 @@
     .phone-logo{font-size:15px;font-weight:900;letter-spacing:-0.5px;}
     .phone-logo span{color:var(--accent);}
     .phone-sign-in{background:var(--accent);color:#fff;border:none;padding:5px 12px;border-radius:14px;font-size:10px;font-weight:700;font-family:'Inter',sans-serif;}
-    .phone-icons{display:flex;gap:8px;}
     .p-icon{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:9px;}
     .p-section{font-size:11px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:5px;}
     .p-flame{width:10px;height:10px;background:var(--accent);border-radius:50% 50% 40% 40%;display:inline-block;}
@@ -171,14 +170,22 @@
     .footer-logo span{color:var(--accent);}
     .footer-note{font-size:11px;color:rgba(255,255,255,0.2);}
     @media(max-width:768px){
-      .nav{padding:16px 20px;}
-      .hero{padding:80px 16px 60px;}
+      .nav{padding:12px 20px;}
+      .hero{padding:20px 16px 60px;min-height:auto;}
       .fc1,.fc2,.fc3,.fc4,.mf1,.mf2,.mf3,.mf4,.bf1,.bf2,.bf3,.bf4{display:none;}
       .section{padding:60px 20px;}
       .feature-grid{grid-template-columns:1fr;}
       .phone-section{padding:60px 20px;flex-direction:column;align-items:center;}
       .mid-section{padding:60px 20px;}
       .footer{padding:20px;}
+      .form-row{flex-direction:column;border-radius:16px;padding:12px;gap:10px;align-items:stretch;overflow:visible;}
+      .form-row input{padding:12px;font-size:16px;border-radius:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);}
+      .form-row button{border-radius:12px;padding:14px;text-align:center;font-size:15px;width:100%;}
+      .hero-sub{font-size:15px;}
+      .bc-title{font-size:clamp(28px,8vw,44px);}
+      .bottom-cta{padding:60px 20px;}
+      .social-proof{padding:40px 20px;}
+      .trust-row{gap:12px;font-size:11px;}
     }
   </style>
 </head>
@@ -305,7 +312,6 @@
       <span style="background:rgba(248,113,113,0.12);color:#f87171;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">NO 1.40</span>
     </div>
   </div>
-
   <div class="phone-section">
     <div class="phone-wrap">
       <div class="phone">
@@ -476,4 +482,4 @@ async function handleJoin(inputId, rowId, successId, errorId, btnId) {
 }
 </script>
 </body>
-</html>
+</html> 
