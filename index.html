@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Delfiex - UK Sports Prediction Market</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
-  <script async src="https://tally.so/widgets/embed.js"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
     :root{--accent:#67a8e7;--accent-dim:rgba(103,168,231,0.12);--accent-border:rgba(103,168,231,0.3);}
@@ -53,9 +52,17 @@
     @keyframes pulse2{0%,100%{opacity:1;}50%{opacity:0.3;}}
     .hero h1{font-size:clamp(40px,7vw,80px);font-weight:900;line-height:1.0;letter-spacing:-3px;margin-bottom:20px;}
     .hero h1 em{font-style:normal;color:var(--accent);}
-    .hero-sub{font-size:17px;color:rgba(255,255,255,0.45);max-width:480px;margin:0 auto 32px;line-height:1.7;font-weight:300;}
-    .tally-wrap{max-width:480px;margin:0 auto 16px;}
-    .tally-wrap iframe{border-radius:12px;}
+    .hero-sub{font-size:17px;color:rgba(255,255,255,0.45);max-width:480px;margin:0 auto 40px;line-height:1.7;font-weight:300;}
+    .form-wrap{max-width:480px;margin:0 auto 24px;}
+    .form-row{display:flex;background:rgba(255,255,255,0.06);border:1px solid rgba(103,168,231,0.3);border-radius:50px;overflow:hidden;padding:4px 4px 4px 20px;align-items:center;transition:border-color 0.2s;}
+    .form-row:focus-within{border-color:rgba(103,168,231,0.6);}
+    .form-row input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-family:'Inter',sans-serif;font-size:14px;padding:10px 0;min-width:0;}
+    .form-row input::placeholder{color:rgba(255,255,255,0.3);}
+    .form-row button{background:#67a8e7;color:#06090f;border:none;padding:12px 22px;font-size:13px;font-weight:700;font-family:'Inter',sans-serif;border-radius:40px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:opacity 0.2s;}
+    .form-row button:hover{opacity:0.85;}
+    .form-row button:disabled{opacity:0.6;cursor:not-allowed;}
+    .success-msg{display:none;color:#67a8e7;font-size:14px;text-align:center;padding:14px;}
+    .error-msg{display:none;color:#f87171;font-size:13px;text-align:center;margin-top:8px;}
     .trust-row{display:flex;align-items:center;justify-content:center;gap:20px;font-size:12px;color:rgba(255,255,255,0.3);flex-wrap:wrap;}
     .trust-row span{display:flex;align-items:center;gap:5px;}
     .dot-accent{width:5px;height:5px;background:var(--accent);border-radius:50%;}
@@ -128,7 +135,6 @@
     .footer-logo{font-size:16px;font-weight:900;letter-spacing:-0.5px;}
     .footer-logo span{color:var(--accent);}
     .footer-note{font-size:11px;color:rgba(255,255,255,0.2);}
-    .divider-line{height:1px;background:rgba(255,255,255,0.05);margin:0 40px;}
     @media(max-width:768px){
       .nav{padding:16px 20px;}
       .hero{padding:40px 16px 60px;}
@@ -199,9 +205,14 @@
     <div class="eyebrow"><div class="adot"></div>Launching 2026 · UK Only</div>
     <h1>Where fans<br>become <em>traders.</em></h1>
     <p class="hero-sub">Predict sport. Trade outcomes. Get paid instantly. The UK's first peer-to-peer prediction market built for the next generation.</p>
-    <div class="tally-wrap">
-  <iframe src="https://tally.so/embed/D45yr5?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="177" frameborder="0" marginheight="0" marginwidth="0" title="Delfiex Waiting list"></iframe>
-</div> 
+    <div class="form-wrap">
+      <div class="form-row" id="heroFormRow">
+        <input type="email" id="heroEmail" placeholder="Drop your email for early access" />
+        <button id="heroBtn" onclick="handleJoin('heroEmail','heroFormRow','heroSuccess','heroError','heroBtn')">Get early access</button>
+      </div>
+      <div class="success-msg" id="heroSuccess">You're in. See you at launch.</div>
+      <div class="error-msg" id="heroError">Something went wrong. Please try again.</div>
+    </div>
     <div class="trust-row">
       <span><div class="dot-accent"></div>Free to join</span>
       <span><div class="dot-accent"></div>UKGC licensed</span>
@@ -312,8 +323,13 @@
   <div class="bc-glow"></div>
   <div class="bc-title">Your instincts<br>are worth <em style="font-style:normal;color:var(--accent);">something.</em></div>
   <p class="bc-sub">Join the waitlist. Get founding member status. Shape the product before anyone else.</p>
-  <div class="tally-wrap" style="position:relative;z-index:1;">
-    <iframe src="https://tally.so/embed/D45yr5?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="177" frameborder="0" marginheight="0" marginwidth="0" title="Delfiex Waiting list"></iframe>
+  <div class="form-wrap" style="position:relative;z-index:1;">
+    <div class="form-row" id="btmFormRow">
+      <input type="email" id="btmEmail" placeholder="Your email address" />
+      <button id="btmBtn" onclick="handleJoin('btmEmail','btmFormRow','btmSuccess','btmError','btmBtn')">Claim my spot</button>
+    </div>
+    <div class="success-msg" id="btmSuccess">Spot claimed. See you at launch.</div>
+    <div class="error-msg" id="btmError">Something went wrong. Please try again.</div>
   </div>
   <div class="trust-row" style="position:relative;z-index:1;margin-top:16px;">
     <span><div class="dot-accent"></div>No spam ever</span>
@@ -327,5 +343,33 @@
   <div class="footer-note">© 2026 Delfiex Ltd · UK Gambling Commission licensed · 18+ · Please gamble responsibly · BeGambleAware.org</div>
 </footer>
 
+<script>
+async function handleJoin(inputId, rowId, successId, errorId, btnId) {
+  const email = document.getElementById(inputId).value;
+  if (!email || !email.includes('@')) return;
+  const btn = document.getElementById(btnId);
+  const orig = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Joining...';
+  document.getElementById(errorId).style.display = 'none';
+  try {
+    const res = await fetch('/api/subscribe', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email})
+    });
+    if (res.ok) {
+      document.getElementById(rowId).style.display = 'none';
+      document.getElementById(successId).style.display = 'block';
+    } else {
+      throw new Error();
+    }
+  } catch {
+    document.getElementById(errorId).style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = orig;
+  }
+}
+</script>
 </body>
 </html>
