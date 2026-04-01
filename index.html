@@ -2,82 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Delfiex - UK Sports & Entertainment Prediction Market</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
+    html{overflow-x:hidden;}
     :root{--accent:#F97316;--accent-dim:rgba(249,115,22,0.12);--accent-border:rgba(249,115,22,0.3);}
-    body{font-family:'Inter',sans-serif;background:#08090c;color:#fff;overflow-x:hidden;}
+    body{font-family:'Inter',sans-serif;background:#08090c;color:#fff;overflow-x:hidden;width:100%;max-width:100vw;}
     .nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;position:relative;z-index:10;}
     .logo{font-size:22px;font-weight:900;letter-spacing:-1px;}
     .logo span{color:var(--accent);}
     .nav-right{display:flex;align-items:center;gap:16px;}
     .nav-link{font-size:13px;color:rgba(255,255,255,0.5);cursor:pointer;text-decoration:none;}
     .nav-cta{font-size:13px;font-weight:600;color:#fff;background:var(--accent);padding:8px 18px;border-radius:20px;cursor:pointer;border:none;font-family:'Inter',sans-serif;}
-    .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px 80px;overflow:hidden;}
-    .scene{position:absolute;inset:0;z-index:0;}
+    .hero{position:relative;min-height:92vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px 120px;overflow:hidden;width:100%;}
+    .scene{position:absolute;inset:0;z-index:0;overflow:hidden;}
     .scene-bg{position:absolute;inset:0;background:#08090c;}
-    .stadium-glow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:140%;height:60%;background:radial-gradient(ellipse at 50% 100%,rgba(249,115,22,0.07) 0%,transparent 70%);}
-    .screen-glow{position:absolute;top:10%;left:50%;transform:translateX(-50%);width:80%;height:40%;background:radial-gradient(ellipse at 50% 0%,rgba(249,115,22,0.04) 0%,transparent 60%);}
-    .floating-card{position:absolute;background:rgba(15,16,20,0.92);border:1px solid rgba(249,115,22,0.2);border-radius:12px;padding:12px 16px;}
-    .fc1{top:20%;left:3%;animation:float1 6s ease-in-out infinite;}
-    .fc2{top:22%;right:3%;animation:float2 7s ease-in-out infinite;}
-    .fc3{bottom:24%;left:4%;animation:float1 8s ease-in-out infinite 1s;}
-    .fc4{bottom:26%;right:4%;animation:float2 6.5s ease-in-out infinite 0.5s;}
-    @keyframes float1{0%,100%{transform:translateY(0);}50%{transform:translateY(-12px);}}
-    @keyframes float2{0%,100%{transform:translateY(0);}50%{transform:translateY(10px);}}
+    .stadium-glow{position:absolute;bottom:0;left:0;right:0;height:50%;background:radial-gradient(ellipse at 50% 100%,rgba(249,115,22,0.06) 0%,transparent 70%);}
+    .screen-glow{position:absolute;top:10%;left:0;right:0;height:40%;background:radial-gradient(ellipse at 50% 0%,rgba(249,115,22,0.03) 0%,transparent 60%);}
+    .floating-card{position:absolute;background:rgba(15,16,20,0.95);border:1px solid rgba(249,115,22,0.2);border-radius:12px;padding:12px 16px;max-width:180px;}
+    .fc1{top:20%;left:2%;animation:float1 6s ease-in-out infinite;}
+    .fc2{top:22%;right:2%;animation:float2 7s ease-in-out infinite;}
+    .fc3{bottom:18%;left:2%;animation:float1 8s ease-in-out infinite 1s;}
+    .fc4{bottom:20%;right:2%;animation:float2 6.5s ease-in-out infinite 0.5s;}
+    @keyframes float1{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+    @keyframes float2{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
     .fc-label{font-size:10px;color:rgba(255,255,255,0.4);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;}
-    .fc-val{font-size:14px;font-weight:700;color:#fff;}
+    .fc-val{font-size:13px;font-weight:700;color:#fff;}
     .live-pill{display:inline-flex;align-items:center;gap:5px;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);border-radius:20px;padding:3px 10px;font-size:10px;color:#f87171;font-weight:600;margin-bottom:6px;}
     .ldot{width:5px;height:5px;background:#f87171;border-radius:50%;animation:pulse 1s ease-in-out infinite;}
     @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.2;}}
-    .friends-strip{position:absolute;bottom:0;left:0;right:0;height:160px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;}
-    .friend{width:52px;border-radius:8px 8px 0 0;position:relative;overflow:hidden;}
-    .f1{background:linear-gradient(180deg,#1a1a2e 0%,#0d0d14 100%);height:110px;animation:cheer 3s ease-in-out infinite;}
-    .f2{background:linear-gradient(180deg,#1c1a20 0%,#0d0d14 100%);height:130px;animation:cheer 3s ease-in-out infinite 0.4s;}
-    .f3{background:linear-gradient(180deg,#1a1820 0%,#0d0d14 100%);height:120px;animation:cheer 3s ease-in-out infinite 0.8s;}
-    .f4{background:linear-gradient(180deg,#1a1a2e 0%,#0d0d14 100%);height:115px;animation:cheer 3s ease-in-out infinite 1.2s;}
-    .f5{background:linear-gradient(180deg,#1c1a20 0%,#0d0d14 100%);height:125px;animation:cheer 3s ease-in-out infinite 0.2s;}
-    .f6{background:linear-gradient(180deg,#1a1820 0%,#0d0d14 100%);height:110px;animation:cheer 3s ease-in-out infinite 0.6s;}
-    .f7{background:linear-gradient(180deg,#1a1a2e 0%,#0d0d14 100%);height:118px;animation:cheer 3s ease-in-out infinite 1s;}
-    .f8{background:linear-gradient(180deg,#1c1a20 0%,#0d0d14 100%);height:128px;animation:cheer 3s ease-in-out infinite 1.4s;}
+    .friends-strip{position:absolute;bottom:0;left:0;right:0;height:140px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;}
+    .friend{width:52px;border-radius:8px 8px 0 0;position:relative;flex-shrink:0;}
+    .f1{background:linear-gradient(180deg,#1a1a2e 0%,#0d0d14 100%);height:100px;animation:cheer 3s ease-in-out infinite;}
+    .f2{background:linear-gradient(180deg,#1c1a20 0%,#0d0d14 100%);height:120px;animation:cheer 3s ease-in-out infinite 0.4s;}
+    .f3{background:linear-gradient(180deg,#1a1820 0%,#0d0d14 100%);height:110px;animation:cheer 3s ease-in-out infinite 0.8s;}
+    .f4{background:linear-gradient(180deg,#1a1a2e 0%,#0d0d14 100%);height:105px;animation:cheer 3s ease-in-out infinite 1.2s;}
+    .f5{background:linear-gradient(180deg,#1c1a20 0%,#0d0d14 100%);height:115px;animation:cheer 3s ease-in-out infinite 0.2s;}
+    .f6{background:linear-gradient(180deg,#1a1820 0%,#0d0d14 100%);height:100px;animation:cheer 3s ease-in-out infinite 0.6s;}
+    .f7{background:linear-gradient(180deg,#1a1a2e 0%,#0d0d14 100%);height:108px;animation:cheer 3s ease-in-out infinite 1s;}
+    .f8{background:linear-gradient(180deg,#1c1a20 0%,#0d0d14 100%);height:118px;animation:cheer 3s ease-in-out infinite 1.4s;}
     @keyframes cheer{0%,100%{transform:translateY(0);}30%{transform:translateY(-8px);}60%{transform:translateY(-4px);}}
-    .friend-head{width:20px;height:20px;border-radius:50%;background:rgba(249,115,22,0.15);position:absolute;top:12px;left:50%;transform:translateX(-50%);}
-    .crowd-fade{position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to top,#08090c 30%,transparent 100%);}
-    .pitch-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(249,115,22,0.3),transparent);}
-    .hero-content{position:relative;z-index:2;width:100%;max-width:640px;}
+    .friend-head{width:18px;height:18px;border-radius:50%;background:rgba(249,115,22,0.1);position:absolute;top:10px;left:50%;transform:translateX(-50%);}
+    .crowd-fade{position:absolute;bottom:0;left:0;right:0;height:180px;background:linear-gradient(to top,#08090c 55%,transparent 100%);}
+    .pitch-line{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(249,115,22,0.2),transparent);}
+    .hero-content{position:relative;z-index:2;width:100%;max-width:620px;}
     .eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--accent-dim);border:1px solid var(--accent-border);color:var(--accent);font-size:11px;font-weight:600;padding:6px 14px;border-radius:20px;margin-bottom:28px;letter-spacing:1px;text-transform:uppercase;}
     .adot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse2 2s ease-in-out infinite;}
     @keyframes pulse2{0%,100%{opacity:1;}50%{opacity:0.3;}}
-    .hero h1{font-size:clamp(40px,7vw,80px);font-weight:900;line-height:1.0;letter-spacing:-3px;margin-bottom:20px;}
+    .hero h1{font-size:clamp(36px,7vw,80px);font-weight:900;line-height:1.0;letter-spacing:-2px;margin-bottom:20px;}
     .hero h1 em{font-style:normal;color:var(--accent);}
     .hero-sub{font-size:17px;color:rgba(255,255,255,0.45);max-width:480px;margin:0 auto 48px;line-height:1.7;font-weight:300;}
-    .form-wrap{max-width:480px;margin:0 auto 24px;position:relative;z-index:5;}
-    .form-row{display:flex;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:50px;overflow:hidden;padding:4px 4px 4px 20px;align-items:center;transition:border-color 0.2s;}
-    .form-row:focus-within{border-color:rgba(249,115,22,0.5);}
-    .form-row input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-family:'Inter',sans-serif;font-size:14px;padding:10px 0;min-width:0;}
-    .form-row input::placeholder{color:rgba(255,255,255,0.3);}
-    .form-row button{background:var(--accent);color:#fff;border:none;padding:12px 22px;font-size:13px;font-weight:700;font-family:'Inter',sans-serif;border-radius:40px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:opacity 0.2s;}
+    .form-wrap{max-width:480px;margin:0 auto 24px;position:relative;z-index:5;width:100%;}
+    .form-row{display:flex;background:rgba(20,21,26,0.98);border:1px solid rgba(255,255,255,0.15);border-radius:50px;padding:4px 4px 4px 20px;align-items:center;transition:border-color 0.2s;width:100%;}
+    .form-row:focus-within{border-color:rgba(249,115,22,0.6);}
+    .form-row input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-family:'Inter',sans-serif;font-size:14px;padding:10px 0;min-width:0;width:100%;}
+    .form-row input::placeholder{color:rgba(255,255,255,0.35);}
+    .form-row button{background:var(--accent);color:#fff;border:none;padding:12px 20px;font-size:13px;font-weight:700;font-family:'Inter',sans-serif;border-radius:40px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:opacity 0.2s;}
     .form-row button:hover{opacity:0.85;}
     .form-row button:disabled{opacity:0.6;cursor:not-allowed;}
     .success-msg{display:none;color:var(--accent);font-size:14px;text-align:center;padding:14px;}
     .error-msg{display:none;color:#f87171;font-size:13px;text-align:center;margin-top:8px;}
-    .trust-row{display:flex;align-items:center;justify-content:center;gap:20px;font-size:12px;color:rgba(255,255,255,0.3);flex-wrap:wrap;}
+    .trust-row{display:flex;align-items:center;justify-content:center;gap:16px;font-size:12px;color:rgba(255,255,255,0.3);flex-wrap:wrap;}
     .trust-row span{display:flex;align-items:center;gap:5px;}
-    .dot-accent{width:5px;height:5px;background:var(--accent);border-radius:50%;}
-    .ticker{background:#0d0e12;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);padding:14px 0;}
+    .dot-accent{width:5px;height:5px;background:var(--accent);border-radius:50%;flex-shrink:0;}
+    .ticker{background:#0d0e12;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);padding:14px 0;overflow:hidden;max-width:100vw;}
     .ticker-inner{display:flex;gap:48px;animation:scroll 25s linear infinite;width:max-content;}
     @keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
     .ticker-item{display:flex;align-items:center;gap:10px;white-space:nowrap;font-size:13px;color:rgba(255,255,255,0.35);font-weight:500;}
     .tv{color:var(--accent);}
     .tn{color:#f87171;}
-    .mid-section{position:relative;padding:80px 40px;overflow:hidden;}
-    .mid-float{position:absolute;background:rgba(15,16,20,0.92);border:1px solid rgba(249,115,22,0.2);border-radius:12px;padding:12px 16px;}
-    .mf1{top:10%;left:2%;animation:float1 7s ease-in-out infinite;}
-    .mf2{top:15%;right:2%;animation:float2 8s ease-in-out infinite 0.5s;}
-    .mf3{bottom:10%;left:3%;animation:float2 6s ease-in-out infinite 1s;}
-    .mf4{bottom:15%;right:3%;animation:float1 9s ease-in-out infinite 0.3s;}
+    .mid-section{position:relative;padding:80px 40px;overflow:hidden;width:100%;}
+    .mid-float{position:absolute;background:rgba(15,16,20,0.95);border:1px solid rgba(249,115,22,0.2);border-radius:12px;padding:12px 16px;max-width:180px;}
+    .mf1{top:8%;left:1%;animation:float1 7s ease-in-out infinite;}
+    .mf2{top:12%;right:1%;animation:float2 8s ease-in-out infinite 0.5s;}
+    .mf3{bottom:8%;left:1%;animation:float2 6s ease-in-out infinite 1s;}
+    .mf4{bottom:12%;right:1%;animation:float1 9s ease-in-out infinite 0.3s;}
     .phone-section{display:flex;align-items:center;gap:60px;max-width:1100px;margin:0 auto;position:relative;z-index:2;flex-wrap:wrap;}
     .phone-wrap{flex:0 0 auto;position:relative;}
     .phone{width:240px;height:480px;background:#0f1014;border:2px solid rgba(255,255,255,0.1);border-radius:36px;overflow:hidden;position:relative;}
@@ -134,7 +135,7 @@
     .pt-list li{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,0.6);}
     .pt-check{width:20px;height:20px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
     .pt-check::after{content:'';width:6px;height:4px;border-left:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);transform:rotate(-45deg) translateY(-1px);}
-    .section{padding:80px 40px;max-width:1100px;margin:0 auto;}
+    .section{padding:80px 40px;max-width:1100px;margin:0 auto;width:100%;}
     .section-eyebrow{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
     .section-title{font-size:clamp(28px,4vw,44px);font-weight:900;letter-spacing:-1.5px;line-height:1.1;margin-bottom:16px;}
     .section-sub{font-size:16px;color:rgba(255,255,255,0.4);max-width:500px;line-height:1.7;margin-bottom:48px;}
@@ -144,7 +145,7 @@
     .feat-num{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1px;margin-bottom:16px;}
     .feat h3{font-size:20px;font-weight:700;letter-spacing:-0.5px;margin-bottom:10px;}
     .feat p{font-size:14px;color:rgba(255,255,255,0.4);line-height:1.7;}
-    .social-proof{padding:60px 40px;text-align:center;}
+    .social-proof{padding:60px 40px;text-align:center;width:100%;}
     .sp-count{font-size:56px;font-weight:900;letter-spacing:-3px;margin-bottom:8px;}
     .sp-count span{color:var(--accent);}
     .sp-label{font-size:16px;color:rgba(255,255,255,0.4);margin-bottom:40px;}
@@ -156,36 +157,42 @@
     .av4{background:#2d2040;color:#a78bfa;}
     .av5{background:#3d1a05;color:var(--accent);}
     .av6{background:#1a1a1a;color:rgba(255,255,255,0.5);font-size:10px;}
-    .bottom-cta{padding:100px 40px;text-align:center;position:relative;overflow:hidden;}
-    .bc-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(249,115,22,0.06) 0%,transparent 70%);pointer-events:none;}
-    .btm-float{position:absolute;background:rgba(15,16,20,0.92);border:1px solid rgba(249,115,22,0.2);border-radius:12px;padding:12px 16px;}
-    .bf1{top:15%;left:3%;animation:float1 7s ease-in-out infinite;}
-    .bf2{top:20%;right:3%;animation:float2 8s ease-in-out infinite;}
-    .bf3{bottom:20%;left:4%;animation:float2 6s ease-in-out infinite 1s;}
-    .bf4{bottom:15%;right:4%;animation:float1 9s ease-in-out infinite 0.5s;}
+    .bottom-cta{padding:100px 40px;text-align:center;position:relative;overflow:hidden;width:100%;}
+    .bc-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60%;height:300px;background:radial-gradient(ellipse,rgba(249,115,22,0.05) 0%,transparent 70%);pointer-events:none;}
+    .btm-float{position:absolute;background:rgba(15,16,20,0.95);border:1px solid rgba(249,115,22,0.2);border-radius:12px;padding:12px 16px;max-width:180px;}
+    .bf1{top:15%;left:1%;animation:float1 7s ease-in-out infinite;}
+    .bf2{top:20%;right:1%;animation:float2 8s ease-in-out infinite;}
+    .bf3{bottom:20%;left:1%;animation:float2 6s ease-in-out infinite 1s;}
+    .bf4{bottom:15%;right:1%;animation:float1 9s ease-in-out infinite 0.5s;}
     .bc-title{font-size:clamp(32px,5vw,58px);font-weight:900;letter-spacing:-2px;line-height:1.05;margin-bottom:16px;position:relative;z-index:1;}
     .bc-sub{font-size:17px;color:rgba(255,255,255,0.4);max-width:420px;margin:0 auto 36px;line-height:1.6;position:relative;z-index:1;}
-    .footer{border-top:1px solid rgba(255,255,255,0.05);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+    .footer{border-top:1px solid rgba(255,255,255,0.05);padding:28px 40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;width:100%;}
     .footer-logo{font-size:16px;font-weight:900;letter-spacing:-0.5px;}
     .footer-logo span{color:var(--accent);}
     .footer-note{font-size:11px;color:rgba(255,255,255,0.2);}
     @media(max-width:768px){
       .nav{padding:12px 20px;}
-      .hero{padding:20px 16px 60px;min-height:auto;}
+      .hero{padding:16px 16px 100px;min-height:auto;}
       .fc1,.fc2,.fc3,.fc4,.mf1,.mf2,.mf3,.mf4,.bf1,.bf2,.bf3,.bf4{display:none;}
-      .section{padding:60px 20px;}
-      .feature-grid{grid-template-columns:1fr;}
-      .phone-section{padding:60px 20px;flex-direction:column;align-items:center;}
-      .mid-section{padding:60px 20px;}
-      .footer{padding:20px;}
+      .friends-strip{height:100px;}
+      .crowd-fade{height:160px;background:linear-gradient(to top,#08090c 60%,transparent 100%);}
+      .hero-sub{font-size:15px;}
       .form-row{padding:3px 3px 3px 16px;}
       .form-row input{font-size:14px;}
       .form-row button{padding:11px 14px;font-size:12px;}
-      .hero-sub{font-size:15px;}
-      .bc-title{font-size:clamp(28px,8vw,44px);}
+      .section{padding:48px 20px;}
+      .feature-grid{grid-template-columns:1fr;}
+      .feat{padding:24px 20px;}
+      .mid-section{padding:48px 20px;}
+      .phone-section{padding:0;flex-direction:column;align-items:center;gap:32px;}
+      .phone-text{padding:0 4px;}
       .bottom-cta{padding:60px 20px;}
+      .bc-title{font-size:clamp(28px,8vw,44px);letter-spacing:-1px;}
       .social-proof{padding:40px 20px;}
-      .trust-row{gap:12px;font-size:11px;}
+      .sp-count{font-size:40px;}
+      .trust-row{gap:10px;font-size:11px;}
+      .footer{padding:20px;flex-direction:column;align-items:flex-start;gap:8px;}
+      .footer-note{font-size:10px;}
     }
   </style>
 </head>
@@ -228,19 +235,19 @@
     <div class="floating-card fc2">
       <div class="fc-label">Haaland scores next?</div>
       <div style="display:flex;gap:6px;margin-top:6px;">
-        <span style="background:rgba(249,115,22,0.15);color:#F97316;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;">YES 2.4</span>
-        <span style="background:rgba(248,113,113,0.12);color:#f87171;padding:4px 10px;border-radius:6px;font-size:12px;font-weight:700;">NO 1.6</span>
+        <span style="background:rgba(249,115,22,0.15);color:#F97316;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:700;">YES 2.4</span>
+        <span style="background:rgba(248,113,113,0.12);color:#f87171;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:700;">NO 1.6</span>
       </div>
     </div>
     <div class="floating-card fc3">
       <div class="fc-label">Your portfolio</div>
-      <div class="fc-val" style="color:#4ade80;font-size:18px;">+£142.80</div>
+      <div class="fc-val" style="color:#4ade80;font-size:16px;">+£142.80</div>
       <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">This week</div>
     </div>
     <div class="floating-card fc4">
       <div class="fc-label">BRITs 2026 · Album</div>
-      <div class="fc-val" style="font-size:13px;">Sabrina Carpenter</div>
-      <div style="color:#F97316;font-size:11px;margin-top:4px;">YES 1.95 · 2,841 traders</div>
+      <div class="fc-val" style="font-size:12px;">Sabrina Carpenter</div>
+      <div style="color:#F97316;font-size:10px;margin-top:4px;">YES 1.95 · 2,841</div>
     </div>
   </div>
   <div class="hero-content">
@@ -288,28 +295,28 @@
 <div class="mid-section" id="about">
   <div class="mid-float mf1">
     <div class="fc-label">Women's Super League</div>
-    <div class="fc-val" style="font-size:13px;">Chelsea vs Arsenal</div>
-    <div style="display:flex;gap:6px;margin-top:6px;">
-      <span style="background:rgba(249,115,22,0.15);color:#F97316;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">YES 1.75</span>
-      <span style="background:rgba(248,113,113,0.12);color:#f87171;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">NO 2.05</span>
+    <div class="fc-val" style="font-size:12px;">Chelsea vs Arsenal</div>
+    <div style="display:flex;gap:5px;margin-top:6px;">
+      <span style="background:rgba(249,115,22,0.15);color:#F97316;padding:3px 7px;border-radius:5px;font-size:10px;font-weight:700;">YES 1.75</span>
+      <span style="background:rgba(248,113,113,0.12);color:#f87171;padding:3px 7px;border-radius:5px;font-size:10px;font-weight:700;">NO 2.05</span>
     </div>
   </div>
   <div class="mid-float mf2">
     <div class="live-pill"><div class="ldot"></div>Live · BAFTA</div>
-    <div class="fc-val" style="font-size:13px;">Best Picture · Conclave</div>
-    <div style="color:#F97316;font-size:11px;margin-top:4px;">YES 2.80 · 1,204 traders</div>
+    <div class="fc-val" style="font-size:12px;">Best Picture · Conclave</div>
+    <div style="color:#F97316;font-size:10px;margin-top:4px;">YES 2.80 · 1,204</div>
   </div>
   <div class="mid-float mf3">
     <div class="fc-label">IPL 2026 · Final</div>
-    <div class="fc-val" style="font-size:13px;">Mumbai Indians win?</div>
-    <div style="color:#4ade80;font-size:11px;margin-top:4px;">+£67.20 on this market</div>
+    <div class="fc-val" style="font-size:12px;">Mumbai Indians win?</div>
+    <div style="color:#4ade80;font-size:10px;margin-top:4px;">+£67.20 on market</div>
   </div>
   <div class="mid-float mf4">
     <div class="fc-label">Love Island 2026</div>
-    <div class="fc-val" style="font-size:13px;">Winner prediction</div>
-    <div style="display:flex;gap:6px;margin-top:6px;">
-      <span style="background:rgba(249,115,22,0.15);color:#F97316;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">YES 3.20</span>
-      <span style="background:rgba(248,113,113,0.12);color:#f87171;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">NO 1.40</span>
+    <div class="fc-val" style="font-size:12px;">Winner prediction</div>
+    <div style="display:flex;gap:5px;margin-top:6px;">
+      <span style="background:rgba(249,115,22,0.15);color:#F97316;padding:3px 7px;border-radius:5px;font-size:10px;font-weight:700;">YES 3.20</span>
+      <span style="background:rgba(248,113,113,0.12);color:#f87171;padding:3px 7px;border-radius:5px;font-size:10px;font-weight:700;">NO 1.40</span>
     </div>
   </div>
   <div class="phone-section">
@@ -410,26 +417,26 @@
   <div class="bc-glow"></div>
   <div class="btm-float bf1">
     <div class="fc-label">Rugby World Cup</div>
-    <div class="fc-val" style="font-size:13px;">England to win?</div>
-    <div style="color:#F97316;font-size:11px;margin-top:4px;">YES 2.60 · 892 traders</div>
+    <div class="fc-val" style="font-size:12px;">England to win?</div>
+    <div style="color:#F97316;font-size:10px;margin-top:4px;">YES 2.60 · 892</div>
   </div>
   <div class="btm-float bf2">
-    <div class="live-pill"><div class="ldot"></div>Live · Wimbledon</div>
-    <div class="fc-val" style="font-size:13px;">Djokovic wins set 3?</div>
-    <div style="display:flex;gap:6px;margin-top:6px;">
-      <span style="background:rgba(249,115,22,0.15);color:#F97316;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">YES 1.90</span>
-      <span style="background:rgba(248,113,113,0.12);color:#f87171;padding:3px 8px;border-radius:5px;font-size:11px;font-weight:700;">NO 1.95</span>
+    <div class="live-pill"><div class="ldot"></div>Wimbledon</div>
+    <div class="fc-val" style="font-size:12px;">Djokovic wins set 3?</div>
+    <div style="display:flex;gap:5px;margin-top:5px;">
+      <span style="background:rgba(249,115,22,0.15);color:#F97316;padding:3px 7px;border-radius:5px;font-size:10px;font-weight:700;">YES 1.90</span>
+      <span style="background:rgba(248,113,113,0.12);color:#f87171;padding:3px 7px;border-radius:5px;font-size:10px;font-weight:700;">NO 1.95</span>
     </div>
   </div>
   <div class="btm-float bf3">
     <div class="fc-label">Love Island 2026</div>
-    <div class="fc-val" style="font-size:13px;">Finalists prediction</div>
-    <div style="color:#4ade80;font-size:11px;margin-top:4px;">+£38.00 this week</div>
+    <div class="fc-val" style="font-size:12px;">Finalists prediction</div>
+    <div style="color:#4ade80;font-size:10px;margin-top:4px;">+£38.00 this week</div>
   </div>
   <div class="btm-float bf4">
     <div class="fc-label">Premier League · GW38</div>
-    <div class="fc-val" style="font-size:13px;">Liverpool title?</div>
-    <div style="color:#F97316;font-size:11px;margin-top:4px;">YES 1.35 · 5,621 traders</div>
+    <div class="fc-val" style="font-size:12px;">Liverpool title?</div>
+    <div style="color:#F97316;font-size:10px;margin-top:4px;">YES 1.35 · 5,621</div>
   </div>
   <div class="bc-title">Your instincts<br>are worth <em style="font-style:normal;color:var(--accent);">something.</em></div>
   <p class="bc-sub">Join the waitlist. Get founding member status. Shape the product before anyone else.</p>
@@ -450,7 +457,7 @@
 
 <footer class="footer">
   <div class="footer-logo">Delfi<span>ex</span></div>
-  <div class="footer-note">© 2026 Delfiex Ltd · UK Gambling Commission licensed · 18+ · Please gamble responsibly · BeGambleAware.org</div>
+  <div class="footer-note">© 2026 Delfiex Ltd · UKGC licensed · 18+ · Please gamble responsibly · BeGambleAware.org</div>
 </footer>
 
 <script>
